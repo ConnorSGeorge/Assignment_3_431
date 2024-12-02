@@ -1,0 +1,61 @@
+=============================
+Question 3
+=============================
+
+(A OR B) AND NOT (A AND B)
+(A (λx. λy. x) B) AND NOT (A B (λx. λy. y))
+(A (λx. λy. x) B) AND (A B (λx. λy. y)) (λx. λy. y) (λx. λy. x)
+(A (λx. λy. x) B) (A B (λx. λy. y)) (λx. λy. y) (λx. λy. x) (λx. λy. y)
+
+Beta Reductions:
+((λx.λy.x) A B) (A B (λx. λy. y)) (λx. λy. y) (λx. λy. x) (λx. λy. y)
+((λy.A) B) (A B (λx. λy. y)) (λx. λy. y) (λx. λy. x) (λx. λy. y)
+A (A B (λx. λy. y)) (λx. λy. y) (λx. λy. x) (λx. λy. y)
+A ((λx.λy.y) A B) (λx. λy. y) (λx. λy. x) (λx. λy. y)
+A ((λy.y) B) (λx. λy. y) (λx. λy. x) (λx. λy. y)
+A B (λx. λy. y) (λx. λy. x) (λx. λy. y)
+A B (λx. λy. y) (λy. (λx. λy. y))
+A B (λy. y)
+A B
+
+==============================
+Question 4
+==============================
+
+(a) (3,2) E S
+(b) (x,y) E S then (3x–2y,x) E S
+
+Assume (x,y) E S -> ( x=2^(n+1)+1 AND y=2^(n)+1 )
+
+Base Case: (x,y) = (3,2) *given (a)
+    x
+3=2^(n+1)+1
+2=2^(n+1)
+2=2*2^(n)
+1=2^(n) 
+n=0 ------ check
+    y
+2=2^(n)+1
+1=2^(n) 
+n=0 ------- check
+BASE CASE PROVED
+v=3x-2y
+w=x
+(v,w)=(3x-2y,x) *given (b)
+PROVE v=2^(n+1)+1 AND w=2^(n)+1
+    v
+v=3x-2y
+v=3(2^(n+1)+1)-2(2^(n)+1)
+v=3(2*2^(n)+1)-2(2^(n)+1)
+v=3(2^(n+1))+3-2(2^(n))-2
+v=3(2^(n+1))-2^(n+1)+1
+v=(3-1)(2^(n+1))+1
+v=2(2^(n+1))+1
+v=2^(n+2)+1
+v=2^(n'+1)+1 where n'=n+1 ------- check
+    w
+w=x
+w=2^(n+1)+1
+w=2^(n')+1 where n'=n+1 ------- check
+
+*by structural induction it has been shown that every element of S is of the form (2^(n+1)+1,2^(n)+1) for some integer n
