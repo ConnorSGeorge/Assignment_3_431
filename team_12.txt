@@ -1,4 +1,17 @@
 =============================
+Question 1
+=============================
+
+if A then false else B
+A (λx. λy. y) B
+
+Beta Reductions:
+(A (λx. λy. y)) B
+((λx. λy. y) B) if A is true
+λy. y if A is true
+B if A is false
+
+=============================
 Question 3
 =============================
 
@@ -59,3 +72,48 @@ w=2^(n+1)+1
 w=2^(n')+1 where n'=n+1 ------- check
 
 *by structural induction it has been shown that every element of S is of the form (2^(n+1)+1,2^(n)+1) for some integer n
+
+=============================
+Question 6
+=============================
+Base Case:
+For a single node tree x:
+preorder(x) = [x]
+postorder(x) = [x]
+reflect(x) = x
+rev([x]) = [x]
+
+Proving - postorder(reflect(x)) = [x] = rev(preorder(x)).
+
+Inductive Step:
+preorder(x) = [r] + preorder(L) + preorder(R)
+postorder(x) = postorder(L) + postorder(R) + [r]
+reflect(x) = A tree with root r, left subtree reflect(R), and right subtree reflect(L)
+
+We need to show:
+postorder(reflect(x)) = rev(preorder(x))
+
+Reflecting x:
+reflect(x) = Root r, left subtree reflect(R), right subtree reflect(L)
+
+Preorder of reflect(x):
+preorder(reflect(x)) = [r] + preorder(reflect(R)) + preorder(reflect(L))
+
+Postorder of reflect(x):
+postorder(reflect(x)) = postorder(reflect(R)) + postorder(reflect(L)) + [r]
+
+By the inductive hypothesis:
+postorder(reflect(R)) = rev(preorder(R))
+postorder(reflect(L)) = rev(preorder(L))
+
+
+Thus - postorder(reflect(x)) = rev(preorder(R)) + rev(preorder(L)) + [r]
+
+Reversing the preorder of x:
+rev(preorder(x)) = rev([r] + preorder(L) + preorder(R))
+rev(preorder(x)) = rev(preorder(R)) + rev(preorder(L)) + [r]
+
+Therefore:
+postorder(reflect(x)) = rev(preorder(x))
+
+We have now shown that postorder(reflect(x)) = rev(preorder(x)) for all binary trees x.
