@@ -12,6 +12,18 @@ Beta Reductions:
 B if A is false
 
 =============================
+Question 2
+=============================
+[A implies (not B)] == [A --> ~B] == (~A v ~B)
+
+(~A v ~B)
+= A(λx. λy. y)(λx. λy. x) OR B(λx. λy. y)(λx. λy. x)
+= (A(λx.λy.y)(λx.λy.x)) (λx.λy.x) (B(λx.λy.y)(λx.λy.x))
+= (A(λy.y))(λx.λy.x)(B(λx.λy.y)(λx.λy.x))
+= (A(λy.y))(λx.λy.x)(B(λy.y))
+= (A(λy.y))(λy.(B(λy.y)))
+
+=============================
 Question 3
 =============================
 
@@ -72,6 +84,32 @@ w=2^(n+1)+1
 w=2^(n')+1 where n'=n+1 ------- check
 
 *by structural induction it has been shown that every element of S is of the form (2^(n+1)+1,2^(n)+1) for some integer n
+
+=============================
+Question 5
+=============================
+Prove rev(inorder (reflect x)) = inorder x (*rev for lists*)
+
+Base Case: x = Empty
+
+rev(inorder(reflect Empty))
+rev(inorder(Empty))
+rev(Empty)
+Empty --Base case is proven
+
+Induction Hypothesis:
+1. I assume that the formula holds true for subtrees l and r.
+
+Inductive Step:
+2. Prove that this holds true for the "next bigger tree" Node(n,l,r)
+
+rev(inorder(reflect Node(n,l,r)))
+rev(inorder(Node(n, reflect r, reflect l)))	              -- Definition of reflect in Class20
+rev( (inorder (reflect r)) @ [n] @ (inorder (reflect l))) -- Definition of inorder in Class20
+rev(inorder(reflect l)) @ [n] @ rev(inorder(reflect r))   -- List reversal
+(inorder l) @ [n] @ (inorder r)			                  -- Induction Hypothesis
+inorder Node(n, l, r)					                  -- Definition of inorder in Class 20
+
 
 =============================
 Question 6
